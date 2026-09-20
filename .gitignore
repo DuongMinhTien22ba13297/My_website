@@ -12,6 +12,7 @@ tasks/
 Screenshot*.png
 6a06d6cea39423ca7a85.jpg
 e3fb9824ec7e6c20356f.jpg
+d9d77ec4bb9e3bc0628f.jpg
 
 # Bỏ qua các file mô hình 3D cũ không dùng trong giao diện hiện tại
 assets/*.glb
