@@ -152,12 +152,15 @@
             position: absolute;
             top: 0;
             left: 0;
-            height: 100%;
+            height: 0;   /* JS sẽ set offsetHeight ngay khi DOMContentLoaded */
+            width: 0;
             border-radius: 0.75rem;
             background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 100%);
             box-shadow: 0 4px 18px rgba(2, 132, 199, 0.45), 0 0 12px rgba(14, 165, 233, 0.3);
             transition: transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
-                        width 0.38s cubic-bezier(0.34, 1.4, 0.64, 1);
+                        width 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
+                        top 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
+                        height 0.38s cubic-bezier(0.34, 1.4, 0.64, 1);
             z-index: 0;
             pointer-events: none;
         }
@@ -435,63 +438,6 @@
             
             <!-- 3. NỘI DUNG TAB MẶC ĐỊNH: CHUYỂN KHOẢN NGÂN HÀNG (BANKING & VIETQR) -->
             <section id="tab-banking" class="tab-content active space-y-4">
-                
-                <!-- THẺ NGÂN HÀNG BIDV 3D HOLOGRAPHIC LUXURY CARD -->
-                <div class="bank-card-container">
-                    <div class="card-glowing-border">
-                        <div id="bidvCard" class="bank-card-sky p-5 sm:p-6 text-white relative z-0">
-                            <!-- Dải sáng Hologram quét qua thẻ VIP -->
-    
-                            
-                            <div class="flex justify-between items-start mb-6">
-                                <div class="flex items-center gap-2.5">
-                                    <!-- Chip EMV Thẻ ATM dập nổi ánh kim -->
-                                    <div class="w-10 h-7 rounded-md bg-gradient-to-tr from-amber-200 via-yellow-100 to-amber-300 shadow-md flex items-center justify-center border border-amber-300/70">
-                                    <div class="w-6 h-4 border border-amber-800/40 rounded-sm"></div>
-                                </div>
-                                <i class="fas fa-wifi rotate-90 text-sky-200 text-xs"></i>
-                            </div>
-
-                            <!-- Logo & Thương hiệu BIDV -->
-                            <div class="text-right">
-                                <div class="font-black text-2xl tracking-wider text-white font-mono drop-shadow">BIDV</div>
-                                <div class="text-[8px] text-sky-200 uppercase tracking-widest font-mono font-semibold">Sky Platinum</div>
-                            </div>
-                        </div>
-
-                        <!-- Số tài khoản dập nổi lớn -->
-                        <div class="mb-4">
-                            <div class="text-[9px] text-sky-200 uppercase tracking-wider font-mono mb-1">Số Tài Khoản (STK)</div>
-                            <div class="flex items-center justify-between">
-                                <span id="stkValue" class="font-mono text-2xl sm:text-3xl font-extrabold tracking-widest text-white drop-shadow-md">
-                                    1320638776
-                                </span>
-                                <!-- Nút sao chép 1 chạm có hiệu ứng nảy -->
-                                <button onclick="copySTK(event)" class="bg-white hover:bg-sky-50 active:scale-90 text-sky-900 font-extrabold text-xs px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 shadow-lg transition-transform" title="Sao chép nhanh">
-                                    <i class="far fa-copy text-xs text-sky-600"></i>
-                                    <span>Sao chép</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Tên chủ thẻ & Chuẩn VietQR -->
-                        <div class="flex justify-between items-end pt-3 border-t border-white/20 font-mono text-xs">
-                            <div>
-                                <div class="text-[8px] text-sky-200 uppercase tracking-wider">Chủ Tài Khoản</div>
-                                <div class="font-bold tracking-wider text-sm sm:text-base text-white uppercase drop-shadow">
-                                    DUONG MINH TIEN
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-[8px] text-sky-200 uppercase tracking-wider">Thanh Toán Nhanh</div>
-                                <div class="font-bold text-xs text-amber-200 flex items-center gap-1">
-                                    <i class="fas fa-bolt text-[10px] text-amber-300"></i> VietQR 24/7
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- KHỐI MÃ QR BIDV SẮC NÉT -->
             <div class="glass-panel rounded-3xl p-5 sm:p-6 text-center space-y-4 shadow-lg banking-qr-box">
@@ -745,13 +691,12 @@
             const pill = document.getElementById('tab-indicator');
             const btn  = document.getElementById(`btn-tab-${tabName}`);
             if (!pill || !btn) return;
-            // Tính toán vị trí tương đối bên trong nav (pill absolute so với nav)
-            const nav   = btn.parentElement;
-            const navRect = nav.getBoundingClientRect();
-            const btnRect = btn.getBoundingClientRect();
-            pill.style.width  = btnRect.width  + 'px';
-            pill.style.height = btnRect.height + 'px';
-            pill.style.transform = `translateX(${btnRect.left - navRect.left}px)`;
+            // dùng offsetLeft/Top so với nav (parentElement) để tính chính xác, không bị ảnh hưởng bởi scroll
+            pill.style.width     = btn.offsetWidth  + 'px';
+            pill.style.height    = btn.offsetHeight + 'px';
+            pill.style.left      = '0px';            // transform tính từ left=0
+            pill.style.top       = btn.offsetTop + 'px';
+            pill.style.transform = `translateX(${btn.offsetLeft}px)`;
         }
 
         // 1. Chuyển đổi giữa các Tab — Sliding pill + trượt ngang nội dung
@@ -789,9 +734,16 @@
 
         // Khởi tạo pill ngay sau khi DOM sẵn sàng
         window.addEventListener('DOMContentLoaded', () => {
-            // Đặt pill ở button banking (tab mặc định) — cần requestAnimationFrame để layout hoàn tất
-            requestAnimationFrame(() => movePill('banking'));
-            // Cập nhật pill khi resize cửa sổ (responsive)
+            requestAnimationFrame(() => {
+                const pill = document.getElementById('tab-indicator');
+                // Tắt transition để pill xuất hiện ngay tại vị trí đúng, không animate từ 0
+                if (pill) pill.style.transition = 'none';
+                movePill('banking');
+                // Bật lại transition sau 1 frame
+                requestAnimationFrame(() => {
+                    if (pill) pill.style.transition = '';
+                });
+            });
             window.addEventListener('resize', () => movePill(currentActiveTab));
         });
 
