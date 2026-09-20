@@ -124,28 +124,22 @@
         /* Nút Tab cơ bản */
         .tab-button {
             position: relative;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: color 0.3s ease;
             color: #0369A1;
             background-color: transparent;
-            overflow: hidden;
+            z-index: 1;
         }
         .tab-button:hover {
-            background-color: rgba(224, 242, 254, 0.7);
-        }
-        .tab-button:active {
-            transform: scale(0.95);
+            color: #0284C7;
         }
 
-        /* TRẠNG THÁI ACTIVE: CHUYỂN XANH RỰC RỠ CHO TẤT CẢ CÁC TAB */
+        /* TRẠNG THÁI ACTIVE: chữ trắng (nền đã do pill đảm nhiệm) */
         .tab-button.active {
-            background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 100%) !important;
             color: #FFFFFF !important;
-            box-shadow: 0 4px 18px rgba(2, 132, 199, 0.45), 0 0 12px rgba(14, 165, 233, 0.35) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
         }
         .tab-button.active .tab-icon {
             color: #FFFFFF !important;
-            animation: iconPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: iconPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         @keyframes iconPop {
             0% { transform: scale(0.7) rotate(-15deg); }
@@ -153,68 +147,58 @@
             100% { transform: scale(1) rotate(0deg); }
         }
 
-        /* ==================== HIỆU ỨNG CHUYỂN TAB "WAO" & MÀU MÈ ==================== */
-        @keyframes waoEntrance {
-            0% {
-                opacity: 0;
-                transform: perspective(900px) rotateX(10deg) translateY(24px) scale(0.94);
-                filter: blur(6px) brightness(1.2);
-            }
-            60% {
-                filter: blur(0px) brightness(1.05);
-            }
-            100% {
-                opacity: 1;
-                transform: perspective(900px) rotateX(0deg) translateY(0) scale(1);
-                filter: blur(0) brightness(1);
-            }
+        /* === SLIDING PILL INDICATOR (viên thuốc xanh trượt ngang) === */
+        .tab-indicator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 100%);
+            box-shadow: 0 4px 18px rgba(2, 132, 199, 0.45), 0 0 12px rgba(14, 165, 233, 0.3);
+            transition: transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
+                        width 0.38s cubic-bezier(0.34, 1.4, 0.64, 1);
+            z-index: 0;
+            pointer-events: none;
         }
 
-        /* Quét sáng ánh cực quang (Shimmer Sweep) */
-        @keyframes lightSweep {
-            0% { transform: translateX(-150%) skewX(-25deg); opacity: 0; }
-            40% { opacity: 0.6; }
-            100% { transform: translateX(250%) skewX(-25deg); opacity: 0; }
+        /* ============================= TRƯỢT NGANG TAB CONTENT ======================== */
+        .tabs-viewport {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
         }
 
         .tab-content {
             display: none;
             position: relative;
+            width: 100%;
         }
         .tab-content.active {
             display: block;
-            animation: waoEntrance 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Hiệu ứng quét sáng khi mở tab */
-        .tab-content.active::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), rgba(56, 189, 248, 0.4), transparent);
-            pointer-events: none;
-            z-index: 30;
-            animation: lightSweep 0.75s ease-out forwards;
+        @keyframes slideInFromRight {
+            from { opacity: 0; transform: translateX(48px); }
+            to   { opacity: 1; transform: translateX(0); }
         }
-
-        /* Hiệu ứng so le bừng sáng các thẻ card */
-        .tab-content.active .interactive-card {
-            animation: waoEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+        @keyframes slideInFromLeft {
+            from { opacity: 0; transform: translateX(-48px); }
+            to   { opacity: 1; transform: translateX(0); }
         }
-        .tab-content.active .interactive-card:nth-child(1) { animation-delay: 0.05s; }
-        .tab-content.active .interactive-card:nth-child(2) { animation-delay: 0.1s; }
-        .tab-content.active .interactive-card:nth-child(3) { animation-delay: 0.15s; }
-        .tab-content.active .interactive-card:nth-child(4) { animation-delay: 0.2s; }
+        .tab-content.slide-from-right {
+            animation: slideInFromRight 0.32s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+        }
+        .tab-content.slide-from-left {
+            animation: slideInFromLeft 0.32s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+        }
 
         /* Thẻ liên kết tương tác */
         .interactive-card {
             background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(186, 230, 253, 0.85);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .interactive-card:hover {
             background: #FFFFFF;
@@ -223,7 +207,7 @@
             box-shadow: 0 14px 28px -6px rgba(2, 132, 199, 0.2);
         }
 
-        /* ==================== THẺ BIDV 3D HOLOGRAPHIC LUXURY CARD ==================== */
+        /* ==================== THẺ BIDV ==================== */
         .bank-card-container {
             perspective: 1200px;
         }
@@ -257,7 +241,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Lớp óng ánh Hologram trên thẻ */
+        /* Quả cầu ánh sáng nền trên thẻ BIDV */
         .bank-card-sky::before {
             content: '';
             position: absolute;
@@ -421,41 +405,48 @@
         <!-- ================================================================= -->
         <!-- 2. THANH 3 TAB CHUYỂN ĐỔI (STICKY TOP, TỰ ĐỘNG CHUYỂN XANH KHI ACTIVE) -->
         <!-- ================================================================= -->
-        <nav class="sticky-tab-bar p-1.5 rounded-2xl flex items-center justify-between gap-1.5 shadow-md">
+        <nav class="sticky-tab-bar p-1.5 rounded-2xl flex items-center justify-between gap-1.5 shadow-md relative">
+            <!-- Viên thuốc xanh trượt ngang (sliding pill indicator) -->
+            <span id="tab-indicator" class="tab-indicator" aria-hidden="true"></span>
             
             <!-- Tab Mạng Xã Hội -->
-            <button onclick="switchTab('social')" id="btn-tab-social" class="tab-button flex-1 py-2.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all">
+            <button onclick="switchTab('social')" id="btn-tab-social" class="tab-button flex-1 py-2.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5">
                 <i class="tab-icon fas fa-globe text-sm"></i>
                 <span>Mạng Xã Hội</span>
             </button>
             
             <!-- Tab Chuyển Khoản (MẶC ĐỊNH ACTIVE KHI LOAD TRANG) -->
-            <button onclick="switchTab('banking')" id="btn-tab-banking" class="tab-button active flex-1 py-2.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all">
+            <button onclick="switchTab('banking')" id="btn-tab-banking" class="tab-button active flex-1 py-2.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5">
                 <i class="tab-icon fas fa-qrcode text-sm"></i>
                 <span>Chuyển Khoản</span>
             </button>
-            
+
             <!-- Tab Giới Thiệu -->
-            <button onclick="switchTab('about')" id="btn-tab-about" class="tab-button flex-1 py-2.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5 transition-all">
+            <button onclick="switchTab('about')" id="btn-tab-about" class="tab-button flex-1 py-2.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5">
                 <i class="tab-icon fas fa-user text-sm"></i>
                 <span>Giới Thiệu</span>
             </button>
         </nav>
 
         <!-- ================================================================= -->
-        <!-- 3. NỘI DUNG TAB MẶC ĐỊNH: CHUYỂN KHOẢN NGÂN HÀNG (BANKING & VIETQR) -->
+        <!-- KHUNG VIEWPORT CHỨA CÁC TAB                                       -->
         <!-- ================================================================= -->
-        <section id="tab-banking" class="tab-content active space-y-4">
+        <div class="tabs-viewport">
             
-            <!-- THẺ NGÂN HÀNG BIDV 3D HOLOGRAPHIC LUXURY CARD -->
-            <div class="bank-card-container">
-                <div class="card-glowing-border">
-                    <div id="bidvCard" class="bank-card-sky p-5 sm:p-6 text-white relative z-0">
-                        
-                        <div class="flex justify-between items-start mb-6">
-                            <div class="flex items-center gap-2.5">
-                                <!-- Chip EMV Thẻ ATM dập nổi ánh kim -->
-                                <div class="w-10 h-7 rounded-md bg-gradient-to-tr from-amber-200 via-yellow-100 to-amber-300 shadow-md flex items-center justify-center border border-amber-300/70">
+            <!-- 3. NỘI DUNG TAB MẶC ĐỊNH: CHUYỂN KHOẢN NGÂN HÀNG (BANKING & VIETQR) -->
+            <section id="tab-banking" class="tab-content active space-y-4">
+                
+                <!-- THẺ NGÂN HÀNG BIDV 3D HOLOGRAPHIC LUXURY CARD -->
+                <div class="bank-card-container">
+                    <div class="card-glowing-border">
+                        <div id="bidvCard" class="bank-card-sky p-5 sm:p-6 text-white relative z-0">
+                            <!-- Dải sáng Hologram quét qua thẻ VIP -->
+    
+                            
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="flex items-center gap-2.5">
+                                    <!-- Chip EMV Thẻ ATM dập nổi ánh kim -->
+                                    <div class="w-10 h-7 rounded-md bg-gradient-to-tr from-amber-200 via-yellow-100 to-amber-300 shadow-md flex items-center justify-center border border-amber-300/70">
                                     <div class="w-6 h-4 border border-amber-800/40 rounded-sm"></div>
                                 </div>
                                 <i class="fas fa-wifi rotate-90 text-sky-200 text-xs"></i>
@@ -503,7 +494,7 @@
             </div>
 
             <!-- KHỐI MÃ QR BIDV SẮC NÉT -->
-            <div class="glass-panel rounded-3xl p-5 sm:p-6 text-center space-y-4 shadow-lg">
+            <div class="glass-panel rounded-3xl p-5 sm:p-6 text-center space-y-4 shadow-lg banking-qr-box">
                 <div class="flex items-center justify-center gap-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-skytheme-500 animate-pulse"></span>
                     <h3 class="font-black text-skytheme-950 text-base">Quét Mã VietQR Chuyển Khoản Nhanh</h3>
@@ -564,7 +555,7 @@
                     </div>
                     <div>
                         <h3 class="font-bold text-skytheme-950 text-sm sm:text-base">Zalo Cá Nhân</h3>
-                        <p class="text-xs text-skytheme-600 mt-0.5">Quét QR hoặc mở cuộc trò chuyện</p>
+                        <p class="text-xs text-skytheme-600 mt-0.5">Mở cuộc trò chuyện</p>
                     </div>
                 </div>
                 
@@ -645,7 +636,7 @@
         <!-- 5. NỘI DUNG TAB: GIỚI THIỆU (ABOUT ME)                            -->
         <!-- ================================================================= -->
         <section id="tab-about" class="tab-content space-y-4">
-            <div class="glass-panel rounded-3xl p-5 sm:p-7 space-y-5 shadow-lg">
+            <div class="glass-panel rounded-3xl p-5 sm:p-7 space-y-5 shadow-lg about-profile-box">
                 
                 <div class="border-b border-skytheme-200 pb-3">
                     <h2 class="text-lg font-bold text-skytheme-950 flex items-center gap-2">
@@ -657,7 +648,7 @@
 
                 <!-- Danh sách thông tin -->
                 <div class="space-y-2.5">
-                    <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
+                    <div class="about-info-item flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
                         <div class="w-10 h-10 rounded-xl bg-skytheme-100 text-skytheme-700 flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-user text-sm"></i>
                         </div>
@@ -667,7 +658,7 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
+                    <div class="about-info-item flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
                         <div class="w-10 h-10 rounded-xl bg-skytheme-100 text-skytheme-700 flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-cake-candles text-sm"></i>
                         </div>
@@ -677,7 +668,7 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
+                    <div class="about-info-item flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
                         <div class="w-10 h-10 rounded-xl bg-skytheme-100 text-skytheme-700 flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-compass text-sm"></i>
                         </div>
@@ -687,7 +678,7 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
+                    <div class="about-info-item flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
                         <div class="w-10 h-10 rounded-xl bg-skytheme-100 text-skytheme-700 flex items-center justify-center flex-shrink-0">
                             <i class="fas fa-envelope text-sm"></i>
                         </div>
@@ -699,6 +690,7 @@
                 </div>
             </div>
         </section>
+        </div><!-- KẾT THÚC TABS-VIEWPORT -->
 
         <!-- FOOTER BẢN QUYỀN -->
         <footer class="text-center py-4 text-xs font-mono text-skytheme-600/80 space-y-1">
@@ -744,26 +736,64 @@
 
     <!-- ==================== JAVASCRIPT ĐIỀU KHIỂN & HIỆU ỨNG ==================== -->
     <script>
-        // 1. Chuyển đổi giữa các Tab (Tất cả tab active đều đổi sang màu xanh rực rỡ)
+        // THỨ TỰ CÁC TAB THEO CHIỀU TỪ TRÁI SANG PHẢI TRÊN GIAO DIỆN
+        const TAB_ORDER = ['social', 'banking', 'about'];
+        let currentActiveTab = 'banking'; // Tab mặc định khi mở web
+
+        // Helper: đặt vị trí viên thuốc xanh đúng theo button đang active
+        function movePill(tabName) {
+            const pill = document.getElementById('tab-indicator');
+            const btn  = document.getElementById(`btn-tab-${tabName}`);
+            if (!pill || !btn) return;
+            // Tính toán vị trí tương đối bên trong nav (pill absolute so với nav)
+            const nav   = btn.parentElement;
+            const navRect = nav.getBoundingClientRect();
+            const btnRect = btn.getBoundingClientRect();
+            pill.style.width  = btnRect.width  + 'px';
+            pill.style.height = btnRect.height + 'px';
+            pill.style.transform = `translateX(${btnRect.left - navRect.left}px)`;
+        }
+
+        // 1. Chuyển đổi giữa các Tab — Sliding pill + trượt ngang nội dung
         function switchTab(tabName) {
-            const tabs = ['banking', 'social', 'about'];
-            
-            tabs.forEach(name => {
+            const oldIndex = TAB_ORDER.indexOf(currentActiveTab);
+            const newIndex = TAB_ORDER.indexOf(tabName);
+            if (newIndex === -1 || tabName === currentActiveTab) return;
+
+            // Hướng trượt: newIndex > oldIndex → nội dung mới từ bên phải vào
+            //              newIndex < oldIndex → nội dung mới từ bên trái vào
+            const slideClass = newIndex > oldIndex ? 'slide-from-right' : 'slide-from-left';
+
+            currentActiveTab = tabName;
+
+            TAB_ORDER.forEach(name => {
                 const content = document.getElementById(`tab-${name}`);
-                const btn = document.getElementById(`btn-tab-${name}`);
-                
+                const btn     = document.getElementById(`btn-tab-${name}`);
+
                 if (name === tabName) {
-                    content.classList.remove('active');
-                    // Buộc reflow để kích hoạt lại hiệu ứng wao
-                    void content.offsetWidth;
-                    content.classList.add('active');
+                    // Kích hoạt tab mới: hiển thị + slide animation
+                    content.classList.remove('slide-from-right', 'slide-from-left');
+                    void content.offsetWidth; // reflow để reset animation
+                    content.classList.add('active', slideClass);
                     btn.classList.add('active');
                 } else {
-                    content.classList.remove('active');
+                    // Ẩn các tab còn lại
+                    content.classList.remove('active', 'slide-from-right', 'slide-from-left');
                     btn.classList.remove('active');
                 }
             });
+
+            // Trượt viên thuốc xanh sang button mới
+            movePill(tabName);
         }
+
+        // Khởi tạo pill ngay sau khi DOM sẵn sàng
+        window.addEventListener('DOMContentLoaded', () => {
+            // Đặt pill ở button banking (tab mặc định) — cần requestAnimationFrame để layout hoàn tất
+            requestAnimationFrame(() => movePill('banking'));
+            // Cập nhật pill khi resize cửa sổ (responsive)
+            window.addEventListener('resize', () => movePill(currentActiveTab));
+        });
 
         // 2. Sao chép số tài khoản BIDV kèm hiệu ứng pháo hoa
         function copySTK(event) {
