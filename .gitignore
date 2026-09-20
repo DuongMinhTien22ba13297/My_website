@@ -1,0 +1,21 @@
+# Bỏ qua các file script Python phụ trợ và file tạm
+*.py
+*.pyc
+__pycache__/
+
+# Bỏ qua tài liệu tham chiếu và file nén zip
+*.zip
+design_references/
+tasks/
+
+# Bỏ qua ảnh chụp màn hình thô ban đầu (đã trích xuất vào assets)
+Screenshot*.png
+6a06d6cea39423ca7a85.jpg
+e3fb9824ec7e6c20356f.jpg
+
+# Bỏ qua các file mô hình 3D cũ không dùng trong giao diện hiện tại
+assets/*.glb
+assets/models_data.js
+assets/three.min.js
+assets/GLTFLoader.js
+assets/*.webm
