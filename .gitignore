@@ -2,6 +2,7 @@
 *.py
 *.pyc
 __pycache__/
+*.backup.html
 
 # Bỏ qua tài liệu tham chiếu và file nén zip
 *.zip
