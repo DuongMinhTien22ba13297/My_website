@@ -1,980 +1,820 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <!-- 
+    <!--
     ==========================================================================
-    Tác dụng: Trang thông tin cá nhân, liên kết mạng xã hội và chuyển khoản BIDV
-    Chủ sở hữu: Dương Minh Tiến (14/07/2004)
-    Chủ đề: Xanh Da Trời (Sky Blue Glassmorphism & Holographic 3D Edition)
-    Cải tiến đột phá:
-      - Tab mặc định: CHUYỂN KHOẢN (Hiển thị thẻ BIDV 3D Holographic và VietQR ngay khi mở)
-      - Bố cục tối ưu 100% cho cả Mobile & Desktop: Avatar DT to tròn hoàn mỹ, không bị che lẹm
-      - Thanh Tab luôn ghim nổi (Sticky) khi cuộn trang, nút tab khi active đều chuyển xanh rực rỡ
-      - Hiệu ứng chuyển Tab siêu "màu mè" & "wao": 3D Flip, Aurora Beam, Ripple Wave & Shimmer
-      - Thẻ BIDV 3D Tilt cảm ứng đa chiều với viền ánh sáng Conic Gradient lấp lánh
-    Ngày tạo: 2026-09-08
-    Ngày sửa: 2026-09-21
-    Lí do sửa: Tối ưu hoàn hảo di động, đổi tab mặc định thành Chuyển Khoản, nâng cấp hiệu ứng Wao
+    Trang liên hệ chính chủ — Dương Minh Tiến
+    Mạng xã hội (tab mặc định) • Chuyển khoản VietQR BIDV • Giới thiệu
+    Nhạc nền: "Đã Lỡ Yêu Em Nhiều" — JustaTee (mặc định tắt, phát bằng nút)
+    Hướng thị giác: giấy tờ cá nhân & phong bì air mail (unslop, 2026-11-16)
     ==========================================================================
     -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dương Minh Tiến — Thông Tin & Chuyển Khoản BIDV</title>
-    
-    <!-- Meta SEO & Theme Color -->
-    <meta name="description" content="Trang cá nhân và thông tin chuyển khoản ngân hàng BIDV của Dương Minh Tiến.">
-    <meta name="theme-color" content="#0284C7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>Dương Minh Tiến — Trang Liên Hệ Chính Chủ & Chuyển Khoản VietQR</title>
 
-    <!-- Google Fonts: Plus Jakarta Sans -->
+    <meta name="description" content="Trang cá nhân chính chủ của Dương Minh Tiến: chuyển khoản VietQR BIDV, Zalo, Telegram, Facebook, email — quét để chuyển khoản, chạm để kết nối.">
+    <meta name="author" content="Dương Minh Tiến">
+    <meta name="theme-color" content="#f7f4ee">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" content="Dương Minh Tiến">
+    <meta property="og:title" content="Dương Minh Tiến — Trang Liên Hệ Chính Chủ & Chuyển Khoản VietQR">
+    <meta property="og:description" content="Quét để chuyển khoản, chạm để kết nối: VietQR BIDV, Zalo, Telegram, Facebook, email của Dương Minh Tiến.">
+    <meta property="og:image" content="assets/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Phong bì liên hệ Dương Minh Tiến — VietQR BIDV, Zalo, Telegram, Facebook, Email">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dương Minh Tiến — Trang Liên Hệ Chính Chủ & Chuyển Khoản VietQR">
+    <meta name="twitter:description" content="Quét để chuyển khoản, chạm để kết nối: VietQR BIDV, Zalo, Telegram, Facebook, email của Dương Minh Tiến.">
+    <meta name="twitter:image" content="assets/og-cover.png">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        skytheme: {
-                            50: '#F0F9FF',
-                            100: '#E0F2FE',
-                            200: '#BAE6FD',
-                            300: '#7DD3FC',
-                            400: '#38BDF8',
-                            500: '#0EA5E9',
-                            600: '#0284C7',
-                            700: '#0369A1',
-                            800: '#075985',
-                            900: '#0C4A6E',
-                            950: '#082F49',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        mono: ['"Space Grotesk"', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- FontAwesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* ==================== THEME XANH DA TRỜI CAO CẤP ==================== */
-        * {
-            -webkit-tap-highlight-color: transparent;
+        :root {
+            --paper: #f7f4ee;
+            --sheet: #fdfbf7;
+            --raised: #efe9df;
+            --hairline: rgba(31, 27, 22, 0.08);
+            --hairline-strong: rgba(31, 27, 22, 0.1);
+            --ink: #1f1b16;
+            --secondary: #5e554a;
+            --muted: #6f6659;
+            --seal: #b3261e;
+            --post: #1e40af;
+            --ok: #2f7d4f;
+            --bad: #b42318;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+            --r-control: 8px;
+            --r-card: 12px;
+            --r-sheet: 16px;
         }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        html {
+            scrollbar-color: var(--muted) var(--paper);
+            scrollbar-width: thin;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--paper); }
+        ::-webkit-scrollbar-thumb { background: var(--raised); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+        ::selection { background: var(--seal); color: var(--sheet); }
+
+        :focus-visible { outline: 2px solid var(--seal); outline-offset: 2px; border-radius: 4px; }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #F0F9FF;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.22) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.18) 0px, transparent 50%),
-                radial-gradient(at 50% 100%, rgba(186, 230, 253, 0.3) 0px, transparent 60%),
-                linear-gradient(180deg, #F0F9FF 0%, #E0F2FE 40%, #BAE6FD 100%);
-            background-attachment: fixed;
+            margin: 0;
+            font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+            font-size: 14px;
+            line-height: 22px;
+            color: var(--ink);
+            background: var(--paper);
             min-height: 100vh;
-            color: #0C4A6E;
-            overflow-x: hidden;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 16px 60px;
+        }
+        body.modal-open { overflow: hidden; }
+
+        .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; margin: -1px;
+            padding: 0; border: 0; clip: rect(0 0 0 0); overflow: hidden; white-space: nowrap;
         }
 
-        /* Hạt ánh sáng cực quang bồng bềnh nền */
-        .ambient-aurora {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            background-image: 
-                radial-gradient(circle at 20% 15%, rgba(2, 132, 199, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 80% 85%, rgba(56, 189, 248, 0.1) 0%, transparent 50%);
-            animation: pulseAurora 8s ease-in-out infinite alternate;
-        }
-        @keyframes pulseAurora {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.08); opacity: 1; }
+        .ic { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+        main { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 16px; }
+
+        .sheet {
+            background: var(--sheet);
+            border: 1px solid var(--hairline);
+            border-radius: var(--r-sheet);
+            box-shadow: 0 1px 2px rgba(31, 27, 22, 0.05);
         }
 
-        /* Glassmorphism chuẩn cao cấp */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.85);
-            box-shadow: 0 20px 40px -15px rgba(2, 132, 199, 0.12), 0 0 1px rgba(2, 132, 199, 0.2);
+        @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .reveal { opacity: 0; animation: rise 0.4s var(--ease) forwards; }
+        .reveal.d2 { animation-delay: 0.05s; }
+
+        /* ---------- Header: letterhead ---------- */
+        .head { padding: 20px; position: relative; }
+        .head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding-right: 40px; }
+        h1 { margin: 0; font-size: 26px; line-height: 1.15; font-weight: 600; letter-spacing: 0; }
+        .sub { margin: 4px 0 0; color: var(--secondary); font-size: 14px; line-height: 20px; max-width: 32ch; }
+
+        .share-btn {
+            position: absolute; top: 12px; right: 12px;
+            width: 32px; height: 32px; border-radius: var(--r-control);
+            border: 1px solid var(--hairline); background: var(--sheet); color: var(--secondary);
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            transition: background-color 0.15s var(--ease), color 0.15s var(--ease);
+        }
+        .share-btn:hover { background: var(--raised); color: var(--ink); }
+        .share-btn:active { transform: scale(0.97); }
+
+        /* ---------- Player (inside the about sheet) ---------- */
+        .player { margin: 0; }
+        .player-row { display: flex; align-items: center; gap: 12px; }
+        .play-btn {
+            width: 32px; height: 32px; border-radius: var(--r-control); border: 0;
+            background: var(--ink); color: var(--sheet); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background-color 0.15s var(--ease);
+        }
+        .play-btn:hover { background: #3a332b; }
+        .play-btn:active { transform: scale(0.97); }
+        .track { min-width: 0; flex: 1; }
+        .track-title { margin: 0; font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .track-meta { margin: 0; font-size: 12px; line-height: 16px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .eq { display: flex; align-items: flex-end; gap: 2px; height: 12px; }
+        .eq span { width: 2px; background: var(--muted); border-radius: 1px; height: 4px; }
+        .eq.live span { animation: eq 0.9s var(--ease) infinite alternate; }
+        .eq.live span:nth-child(2) { animation-delay: 0.15s; }
+        .eq.live span:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes eq { from { height: 3px; } to { height: 12px; } }
+        .mute-btn {
+            width: 32px; height: 32px; border-radius: var(--r-control);
+            border: 1px solid var(--hairline); background: transparent; color: var(--secondary);
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            transition: background-color 0.15s var(--ease), color 0.15s var(--ease);
+        }
+        .mute-btn:hover { background: var(--raised); color: var(--ink); }
+        .mute-btn[aria-pressed="true"] { color: var(--bad); }
+        .seek { margin-top: 8px; padding: 2px 0; cursor: pointer; }
+        .seek-track { height: 3px; border-radius: 2px; background: var(--raised); overflow: hidden; }
+        #musicProgressBar { height: 100%; width: 0; background: var(--ink); border-radius: 2px; }
+
+        /* ---------- Tabs ---------- */
+        .tabs {
+            position: sticky; top: 8px; z-index: 40;
+            display: flex; padding: 4px; gap: 4px;
+            background: var(--sheet); border: 1px solid var(--hairline);
+            border-radius: 10px; box-shadow: 0 1px 2px rgba(31, 27, 22, 0.05);
+        }
+        .tab-line {
+            position: absolute; bottom: 4px; left: 0; height: 2px; width: 0;
+            background: var(--seal); border-radius: 1px;
+            transition: transform 0.24s var(--ease);
+            pointer-events: none; z-index: 2;
+        }
+        .tab {
+            flex: 1; height: 40px; border: 0; background: transparent; cursor: pointer;
+            border-radius: var(--r-control); color: var(--secondary);
+            font: 500 13px/20px 'Be Vietnam Pro', sans-serif;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: background-color 0.15s var(--ease), color 0.15s var(--ease);
+            position: relative; z-index: 1; white-space: nowrap;
+        }
+        .tab:hover { background: var(--raised); color: var(--ink); }
+        .tab[aria-selected="true"] { color: var(--ink); }
+        .tab .ic { width: 16px; height: 16px; display: none; }
+
+        /* ---------- Panels ---------- */
+        .panel { display: none; }
+        .panel.active { display: block; animation: rise 0.24s var(--ease) 0.08s both; }
+
+        .list { padding: 4px 16px; }
+        .row {
+            display: flex; align-items: center; gap: 12px;
+            min-height: 64px; padding: 8px 0;
+            border-bottom: 1px solid var(--hairline);
+        }
+        .row:last-child { border-bottom: 0; }
+        .mark { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .mark img, .mark svg { width: 24px; height: 24px; }
+        .row-text { min-width: 0; flex: 1; }
+        .row-text h3 { margin: 0; font-size: 14px; line-height: 20px; font-weight: 500; }
+        .row-text p { margin: 0; font-size: 12px; line-height: 16px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .row-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+        .btn {
+            height: 36px; padding: 0 16px; border-radius: var(--r-control);
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            font: 500 13px/20px 'Be Vietnam Pro', sans-serif; text-decoration: none; cursor: pointer;
+            transition: background-color 0.15s var(--ease), color 0.15s var(--ease), border-color 0.15s var(--ease);
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-primary { border: 1px solid var(--ink); background: var(--ink); color: var(--sheet); }
+        .btn-primary:hover { background: #3a332b; border-color: #3a332b; }
+        .btn-second { border: 1px solid var(--hairline-strong); background: var(--sheet); color: var(--ink); }
+        .btn-second:hover { background: var(--raised); }
+        .btn-icon {
+            width: 32px; height: 32px; padding: 0; border-radius: var(--r-control);
+            border: 1px solid var(--hairline); background: transparent; color: var(--secondary);
+            display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+            transition: background-color 0.15s var(--ease), color 0.15s var(--ease);
+        }
+        .btn-icon:hover { background: var(--raised); color: var(--ink); }
+        .btn-icon:active { transform: scale(0.97); }
+
+        /* ---------- Envelope (the moment) ---------- */
+        .envelope { overflow: hidden; }
+        .airmail {
+            height: 6px;
+            background: repeating-linear-gradient(-45deg,
+                var(--seal) 0 10px, var(--sheet) 10px 20px,
+                var(--post) 20px 30px, var(--sheet) 30px 40px);
+        }
+        .env-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+        .env-body h2 { margin: 0; font-size: 16px; line-height: 24px; font-weight: 500; }
+        .env-sub { margin: -4px 0 0; font-size: 12px; line-height: 16px; color: var(--muted); }
+        .stamp-zone { position: relative; align-self: center; padding: 4px 0; }
+        .stamp {
+            background: #ffffff; padding: 12px; width: 184px;
+            --perf: radial-gradient(circle 5px at 5px 5px, transparent 96%, #000);
+            -webkit-mask-image: var(--perf), var(--perf), var(--perf), var(--perf), linear-gradient(#000 0 0);
+            -webkit-mask-size: 10px 10px, 10px 10px, 10px 10px, 10px 10px, calc(100% - 10px) calc(100% - 10px);
+            -webkit-mask-position: 0 0, 0 100%, 0 0, 100% 0, 50% 50%;
+            -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y, no-repeat;
+            mask-image: var(--perf), var(--perf), var(--perf), var(--perf), linear-gradient(#000 0 0);
+            mask-size: 10px 10px, 10px 10px, 10px 10px, 10px 10px, calc(100% - 10px) calc(100% - 10px);
+            mask-position: 0 0, 0 100%, 0 0, 100% 0, 50% 50%;
+            mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y, no-repeat;
+            filter: drop-shadow(0 1px 2px rgba(31, 27, 22, 0.12));
+        }
+        .stamp img { display: block; width: 100%; height: auto; }
+        .doc { border-top: 1px solid var(--hairline); }
+        .doc-row {
+            display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+            padding: 6px 0; border-bottom: 1px solid var(--hairline);
+        }
+        .doc-row dt { font-size: 12px; line-height: 16px; color: var(--muted); }
+        .doc-row dd { margin: 0; font-size: 14px; line-height: 20px; font-weight: 500; text-align: right; }
+        .doc-row dd.big { font-size: 16px; line-height: 24px; letter-spacing: 0.02em; }
+        .env-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .env-actions .btn { height: 36px; }
+        .note { margin: 0; display: flex; gap: 8px; align-items: flex-start; font-size: 12px; line-height: 16px; color: var(--muted); }
+        .note .ic { margin-top: 1px; }
+
+        /* ---------- About ---------- */
+        .about { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+        .about h2 { margin: 0; font-size: 16px; line-height: 24px; font-weight: 500; }
+        .intro { margin: -8px 0 0; color: var(--secondary); font-size: 14px; line-height: 22px; }
+        .facts { margin: 0; border-top: 1px solid var(--hairline); }
+        .fact {
+            display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+            padding: 8px 0; border-bottom: 1px solid var(--hairline);
+        }
+        .fact dt { font-size: 12px; line-height: 16px; color: var(--muted); }
+        .fact dd { margin: 0; font-size: 14px; line-height: 20px; font-weight: 500; text-align: right; overflow-wrap: anywhere; }
+
+        footer {
+            position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+            padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+            text-align: center; font-size: 12px; line-height: 16px; color: var(--muted);
+            background: var(--paper); border-top: 1px solid var(--hairline);
         }
 
-        /* Thanh Tab Ghim Cố Định Nổi (Sticky Top) */
-        .sticky-tab-bar {
-            position: sticky;
-            top: 10px;
-            z-index: 50;
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(186, 230, 253, 0.9);
-            box-shadow: 0 12px 30px -8px rgba(2, 132, 199, 0.22), 0 0 1px rgba(2, 132, 199, 0.3);
-        }
-
-        /* Nút Tab cơ bản */
-        .tab-button {
-            position: relative;
-            transition: color 0.3s ease;
-            color: #0369A1;
-            background-color: transparent;
-            z-index: 1;
-        }
-        .tab-button:hover {
-            color: #0284C7;
-        }
-
-        /* TRẠNG THÁI ACTIVE: chữ trắng (nền đã do pill đảm nhiệm) */
-        .tab-button.active {
-            color: #FFFFFF !important;
-        }
-        .tab-button.active .tab-icon {
-            color: #FFFFFF !important;
-            animation: iconPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes iconPop {
-            0% { transform: scale(0.7) rotate(-15deg); }
-            60% { transform: scale(1.25) rotate(10deg); }
-            100% { transform: scale(1) rotate(0deg); }
-        }
-
-        /* === SLIDING PILL INDICATOR (viên thuốc xanh trượt ngang) === */
-        .tab-indicator {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 0;   /* JS sẽ set offsetHeight ngay khi DOMContentLoaded */
-            width: 0;
-            border-radius: 0.75rem;
-            background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 100%);
-            box-shadow: 0 4px 18px rgba(2, 132, 199, 0.45), 0 0 12px rgba(14, 165, 233, 0.3);
-            transition: transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
-                        width 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
-                        top 0.38s cubic-bezier(0.34, 1.4, 0.64, 1),
-                        height 0.38s cubic-bezier(0.34, 1.4, 0.64, 1);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* ============================= TRƯỢT NGANG TAB CONTENT ======================== */
-        .tabs-viewport {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-        }
-
-        .tab-content {
-            display: none;
-            position: relative;
-            width: 100%;
-        }
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes slideInFromRight {
-            from { opacity: 0; transform: translateX(48px); }
-            to   { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slideInFromLeft {
-            from { opacity: 0; transform: translateX(-48px); }
-            to   { opacity: 1; transform: translateX(0); }
-        }
-        .tab-content.slide-from-right {
-            animation: slideInFromRight 0.32s cubic-bezier(0.25, 0.8, 0.25, 1) both;
-        }
-        .tab-content.slide-from-left {
-            animation: slideInFromLeft 0.32s cubic-bezier(0.25, 0.8, 0.25, 1) both;
-        }
-
-        /* Thẻ liên kết tương tác */
-        .interactive-card {
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(186, 230, 253, 0.85);
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .interactive-card:hover {
-            background: #FFFFFF;
-            border-color: #0284C7;
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 14px 28px -6px rgba(2, 132, 199, 0.2);
-        }
-
-        /* ==================== THẺ BIDV ==================== */
-        .bank-card-container {
-            perspective: 1200px;
-        }
-        .bank-card-sky {
-            background: linear-gradient(135deg, #082F49 0%, #0C4A6E 35%, #0369A1 70%, #0284C7 100%);
-            position: relative;
-            overflow: hidden;
-            border-radius: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 20px 45px -10px rgba(3, 105, 161, 0.45), 0 0 20px rgba(56, 189, 248, 0.2);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-            transform-style: preserve-3d;
-        }
-        .bank-card-sky:hover {
-            transform: translateY(-4px) rotateX(4deg) rotateY(-4deg);
-            box-shadow: 0 28px 55px -10px rgba(3, 105, 161, 0.55), 0 0 30px rgba(56, 189, 248, 0.35);
-        }
-
-        /* Viền ánh sáng chuyển động quanh thẻ BIDV (Conic Gradient Border) */
-        .card-glowing-border {
-            position: relative;
-            padding: 2px;
-            border-radius: 1.6rem;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.8), rgba(2, 132, 199, 0.2), rgba(251, 191, 36, 0.6), rgba(56, 189, 248, 0.8));
-            background-size: 300% 300%;
-            animation: borderRotate 6s linear infinite;
-        }
-        @keyframes borderRotate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Quả cầu ánh sáng nền trên thẻ BIDV */
-        .bank-card-sky::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -25%;
-            width: 320px;
-            height: 320px;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, transparent 65%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .bank-card-sky::after {
-            content: '';
-            position: absolute;
-            bottom: -35%;
-            left: -20%;
-            width: 240px;
-            height: 240px;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.18) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        /* Toast thông báo */
-        #toast {
-            visibility: hidden;
-            opacity: 0;
-            transform: translate(-50%, 20px) scale(0.9);
-            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            transform: translate(-50%, 0) scale(1);
-        }
-
-        /* Modal QR */
+        /* ---------- Modal ---------- */
         #qrModal {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            position: fixed; inset: 0; z-index: 60; padding: 16px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(31, 27, 22, 0.4);
+            transition: opacity 0.2s var(--ease), visibility 0.2s var(--ease);
         }
-        #qrModal.hidden-modal {
-            opacity: 0;
-            visibility: hidden;
+        #qrModal.hidden-modal { opacity: 0; visibility: hidden; pointer-events: none; }
+        #qrModal.active-modal { opacity: 1; visibility: visible; pointer-events: auto; }
+        .modal-sheet {
+            width: 100%; max-width: 360px; padding: 20px; position: relative;
+            display: flex; flex-direction: column; gap: 12px;
+            background: var(--sheet); border: 1px solid var(--hairline);
+            border-radius: var(--r-sheet); box-shadow: 0 8px 24px rgba(31, 27, 22, 0.16);
+        }
+        #qrModal.active-modal .modal-sheet { animation: rise 0.22s var(--ease) both; }
+        .modal-sheet h3 { margin: 0; padding-right: 40px; font-size: 16px; line-height: 24px; font-weight: 500; }
+        .modal-frame { background: #ffffff; border: 1px solid var(--hairline); border-radius: var(--r-card); padding: 12px; display: flex; justify-content: center; }
+        .modal-frame img { max-height: 288px; width: auto; max-width: 100%; object-fit: contain; }
+        #modalDesc { margin: 0; font-size: 12px; line-height: 16px; color: var(--muted); }
+        .modal-actions { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+
+        /* ---------- Toast ---------- */
+        #toast {
+            position: fixed; bottom: 64px; left: 50%; z-index: 70;
+            transform: translate(-50%, 8px); opacity: 0; visibility: hidden;
+            display: flex; align-items: center; gap: 8px;
+            max-width: calc(100vw - 32px); padding: 10px 16px;
+            background: var(--ink); color: var(--sheet);
+            border-radius: var(--r-control); box-shadow: 0 8px 24px rgba(31, 27, 22, 0.16);
+            font-size: 13px; line-height: 20px; font-weight: 500;
+            transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s var(--ease);
+        }
+        #toast.show { transform: translate(-50%, 0); opacity: 1; visibility: visible; }
+        #toast.error { background: var(--bad); }
+
+        .ripple-host { position: relative; overflow: hidden; }
+        .ripple {
+            position: absolute; border-radius: 50%; transform: scale(0);
+            animation: rippleAnim 0.5s var(--ease); background: rgba(253, 251, 247, 0.35);
             pointer-events: none;
         }
-        #qrModal.active-modal {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
+        @keyframes rippleAnim { to { transform: scale(3.5); opacity: 0; } }
+
+        @media (max-width: 639px) {
+            .row { flex-wrap: wrap; row-gap: 8px; min-height: 100px; }
+            .row-text { flex: 1 1 160px; }
+            .row-actions { width: 100%; padding-left: 44px; }
+            .row-text p { white-space: normal; overflow: visible; text-overflow: clip; }
+        }
+
+        @media (min-width: 640px) {
+            body { padding: 32px 24px 64px; }
+            .head { padding: 24px; }
+            h1 { font-size: 34px; }
+            .tab { font-size: 14px; }
+            .tab .ic { display: block; }
+            .seek { padding: 4px 0; }
+            .env-body, .about { padding: 24px; }
+            .env-body { gap: 12px; }
+            .env-sub { margin: -8px 0 0; }
+            .doc-row { padding: 8px 0; }
+            .env-actions .btn { height: 40px; }
+            .stamp { width: 260px; }
+            .list { padding: 4px 20px; }
+        }
+
+        @media (min-width: 640px) and (min-height: 820px) {
+            body { justify-content: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .panel.active, #qrModal.active-modal .modal-sheet, .ripple, .eq.live span { animation: none !important; }
+            .reveal { opacity: 1; }
+            .tab-line, #toast, #qrModal { transition: none !important; }
         }
     </style>
 </head>
-<body class="flex flex-col items-center justify-start min-h-screen py-5 px-3.5 sm:px-6">
+<body>
 
-    <!-- Ánh sáng nền cực quang chuyển động -->
-    <div class="ambient-aurora"></div>
+    <!-- Lucide icon set, one stroke -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+        <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+        <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="16" y="3" width="5" height="5" rx="1"/><rect x="3" y="16" width="5" height="5" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></symbol>
+        <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></symbol>
+        <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+        <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+        <symbol id="i-vol" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
+        <symbol id="i-vol-x" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+        <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+        <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+        <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    </svg>
 
-    <!-- KHUNG CHÍNH (Tối ưu hoàn hảo cả Mobile & Desktop) -->
-    <main class="w-full max-w-lg relative z-10 space-y-4">
-        
-        <!-- ================================================================= -->
-        <!-- 1. HEADER THÔNG TIN CÁ NHÂN (AVATAR ĐẦY ĐỦ 100%, KHÔNG BỊ CHE LẸM) -->
-        <!-- ================================================================= -->
-        <header class="glass-panel rounded-3xl p-5 sm:p-7 text-center relative overflow-hidden shadow-lg">
-            
-            <!-- Vầng sáng trang trí hai góc -->
-            <div class="absolute -top-12 -right-12 w-32 h-32 bg-skytheme-300 rounded-full blur-2xl pointer-events-none opacity-50"></div>
-            <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-skytheme-400 rounded-full blur-2xl pointer-events-none opacity-40"></div>
-
-            <!-- Nút Share nhanh góc trên bên phải -->
-            <button onclick="shareProfile()" title="Chia sẻ trang này" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white text-skytheme-700 hover:bg-skytheme-600 hover:text-white transition-all flex items-center justify-center shadow-md border border-skytheme-200 active:scale-90">
-                <i class="fas fa-share-nodes text-xs"></i>
+    <main>
+        <!-- Letterhead -->
+        <header class="sheet head reveal">
+            <button onclick="shareProfile()" class="share-btn" title="Chia sẻ trang này" aria-label="Chia sẻ trang này">
+                <svg class="ic"><use href="#i-share"/></svg>
             </button>
-
-            <!-- KHỐI AVATAR TRÒN HOÀN MỸ, NẰM TRỌN VẸN Ở ĐỈNH HEADER -->
-            <div class="relative inline-block mb-3">
-                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-skytheme-600 via-skytheme-400 to-skytheme-200 shadow-xl mx-auto">
-                    <div class="w-full h-full rounded-full bg-gradient-to-br from-skytheme-950 via-skytheme-900 to-skytheme-700 flex flex-col items-center justify-center text-white border-2 border-white shadow-inner relative overflow-hidden">
-                        <span class="font-extrabold text-2xl sm:text-3xl tracking-wider text-skytheme-100 font-mono">DT</span>
-                        <div class="text-[9px] uppercase font-bold text-skytheme-300 tracking-widest font-mono">TIẾN</div>
-                    </div>
-                </div>
-                <!-- Huy hiệu chính chủ (Verified Badge) -->
-                <div class="absolute bottom-0.5 right-0.5 bg-skytheme-500 text-white w-6 h-6 rounded-full flex items-center justify-center shadow-md border-2 border-white" title="Trang chính chủ">
-                    <i class="fas fa-check text-[10px] font-black"></i>
+            <div class="head-row">
+                <div>
+                    <h1>Dương Minh Tiến</h1>
+                    <p class="sub">Mọi kênh liên hệ và chuyển khoản chính chủ của Tiến</p>
                 </div>
             </div>
-
-            <!-- Họ và Tên -->
-            <h1 class="text-2xl sm:text-3xl font-black text-skytheme-950 tracking-tight">
-                Dương Minh Tiến
-            </h1>
-
-            <!-- ================================================================= -->
-            <!-- TRÌNH PHÁT NHẠC TỰ ĐỘNG PHONG CÁCH FACEBOOK / INSTAGRAM STORY     -->
-            <!-- BÀI HÁT: "ĐÃ LỠ YÊU EM NHIỀU" - JUSTATEE                          -->
-            <!-- ================================================================= -->
-            <div class="mt-3.5 p-3 rounded-2xl bg-white/95 border border-skytheme-200/90 shadow-sm flex items-center justify-between gap-3 text-left relative overflow-hidden group">
-                
-                <!-- Đĩa than xoay tròn khi phát nhạc -->
-                <div class="flex items-center gap-3 min-w-0">
-                    <div class="relative w-11 h-11 rounded-full flex-shrink-0 flex items-center justify-center bg-skytheme-950 shadow-md">
-                        <!-- Đĩa quay -->
-                        <div id="vinylDisc" class="w-full h-full rounded-full border-2 border-skytheme-400/40 flex items-center justify-center animate-[spin_5s_linear_infinite]">
-                            <div class="w-4 h-4 rounded-full bg-skytheme-500 border border-white flex items-center justify-center">
-                                <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
-                            </div>
-                        </div>
-                        <!-- Nốt nhạc nhỏ -->
-                        <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-skytheme-500 text-white flex items-center justify-center text-[8px] shadow">
-                            <i class="fas fa-music"></i>
-                        </div>
-                    </div>
-
-                    <!-- Tên bài hát & Ca sĩ -->
-                    <div class="min-w-0">
-                        <div class="flex items-center gap-1.5">
-                            <span class="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded bg-skytheme-100 text-skytheme-700 flex items-center gap-1 font-mono">
-                                <i class="fab fa-instagram text-[10px]"></i> MUSIC
-                            </span>
-                            <!-- Sóng nhạc Equalizer nhảy múa -->
-                            <div id="equalizerWave" class="flex items-end gap-0.5 h-3">
-                                <span class="w-0.5 h-full bg-skytheme-500 rounded-full animate-[pulse_0.6s_ease-in-out_infinite]"></span>
-                                <span class="w-0.5 h-2.5 bg-skytheme-600 rounded-full animate-[pulse_0.8s_ease-in-out_infinite_0.2s]"></span>
-                                <span class="w-0.5 h-3 bg-skytheme-400 rounded-full animate-[pulse_0.5s_ease-in-out_infinite_0.1s]"></span>
-                                <span class="w-0.5 h-1.5 bg-skytheme-500 rounded-full animate-[pulse_0.7s_ease-in-out_infinite_0.3s]"></span>
-                            </div>
-                        </div>
-                        <h4 class="font-bold text-xs sm:text-sm text-skytheme-950 truncate mt-0.5">
-                            Đã Lỡ Yêu Em Nhiều
-                        </h4>
-                        <p class="text-[11px] text-skytheme-600 truncate font-medium">
-                            JustaTee • Official Audio
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Nút điều khiển Play/Pause & Mute -->
-                <div class="flex items-center gap-1.5 flex-shrink-0">
-                    <button onclick="toggleAudio()" id="btnPlayPause" class="w-9 h-9 rounded-full bg-skytheme-600 hover:bg-skytheme-700 text-white flex items-center justify-center shadow-md transition-transform active:scale-90" title="Phát / Tạm dừng">
-                        <i id="playIcon" class="fas fa-pause text-xs"></i>
-                    </button>
-                    <button onclick="toggleMute()" id="btnMute" class="w-8 h-8 rounded-full bg-skytheme-50 hover:bg-skytheme-100 text-skytheme-700 flex items-center justify-center transition-colors text-xs border border-skytheme-200" title="Tắt / Bật tiếng">
-                        <i id="muteIcon" class="fas fa-volume-high text-xs"></i>
-                    </button>
-                </div>
-
-                <!-- Thanh tiến trình bài hát -->
-                <div class="absolute bottom-0 left-0 right-0 h-1 bg-skytheme-100 overflow-hidden">
-                    <div id="musicProgressBar" class="h-full bg-skytheme-500 w-0 transition-all duration-200"></div>
-                </div>
-            </div>
-
-            <!-- Tệp Audio HTML5 -->
-            <audio id="bgAudio" loop preload="auto">
-                <source src="assets/da_lo_yeu_em_nhieu.mp3" type="audio/mp3">
-                <source src="assets/da_lo_yeu_em_nhieu.webm" type="audio/webm">
-            </audio>
         </header>
 
-        <!-- ================================================================= -->
-        <!-- 2. THANH 3 TAB CHUYỂN ĐỔI (STICKY TOP, TỰ ĐỘNG CHUYỂN XANH KHI ACTIVE) -->
-        <!-- ================================================================= -->
-        <nav class="sticky-tab-bar p-1.5 rounded-2xl flex items-center justify-between gap-1.5 shadow-md relative">
-            <!-- Viên thuốc xanh trượt ngang (sliding pill indicator) -->
-            <span id="tab-indicator" class="tab-indicator" aria-hidden="true"></span>
-            
-            <!-- Tab Mạng Xã Hội -->
-            <button onclick="switchTab('social')" id="btn-tab-social" class="tab-button flex-1 py-2.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5">
-                <i class="tab-icon fas fa-globe text-sm"></i>
-                <span>Mạng Xã Hội</span>
+        <!-- Tabs -->
+        <nav id="tabBar" class="tabs reveal d2" role="tablist" aria-label="Nội dung trang">
+            <span id="tab-indicator" class="tab-line" aria-hidden="true"></span>
+            <button onclick="switchTab('social')" id="btn-tab-social" role="tab" aria-controls="tab-social" aria-selected="true" tabindex="0" class="tab">
+                <svg class="ic"><use href="#i-globe"/></svg>Mạng xã hội
             </button>
-            
-            <!-- Tab Chuyển Khoản (MẶC ĐỊNH ACTIVE KHI LOAD TRANG) -->
-            <button onclick="switchTab('banking')" id="btn-tab-banking" class="tab-button active flex-1 py-2.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5">
-                <i class="tab-icon fas fa-qrcode text-sm"></i>
-                <span>Chuyển Khoản</span>
+            <button onclick="switchTab('banking')" id="btn-tab-banking" role="tab" aria-controls="tab-banking" aria-selected="false" tabindex="-1" class="tab">
+                <svg class="ic"><use href="#i-qr"/></svg>Chuyển khoản
             </button>
-
-            <!-- Tab Giới Thiệu -->
-            <button onclick="switchTab('about')" id="btn-tab-about" class="tab-button flex-1 py-2.5 px-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-1.5">
-                <i class="tab-icon fas fa-user text-sm"></i>
-                <span>Giới Thiệu</span>
+            <button onclick="switchTab('about')" id="btn-tab-about" role="tab" aria-controls="tab-about" aria-selected="false" tabindex="-1" class="tab">
+                <svg class="ic"><use href="#i-user"/></svg>Giới thiệu
             </button>
         </nav>
 
-        <!-- ================================================================= -->
-        <!-- KHUNG VIEWPORT CHỨA CÁC TAB                                       -->
-        <!-- ================================================================= -->
-        <div class="tabs-viewport">
-            
-            <!-- 3. NỘI DUNG TAB MẶC ĐỊNH: CHUYỂN KHOẢN NGÂN HÀNG (BANKING & VIETQR) -->
-            <section id="tab-banking" class="tab-content active space-y-4">
-
-            <!-- KHỐI MÃ QR BIDV SẮC NÉT -->
-            <div class="glass-panel rounded-3xl p-5 sm:p-6 text-center space-y-4 shadow-lg banking-qr-box">
-                <div class="flex items-center justify-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-skytheme-500 animate-pulse"></span>
-                    <h3 class="font-black text-skytheme-950 text-base">Quét Mã VietQR Chuyển Khoản Nhanh</h3>
-                </div>
-                <p class="text-xs text-skytheme-700 max-w-xs mx-auto">
-                    Tương thích quét tức thì trên mọi ứng dụng Ngân hàng (BIDV, Vietcombank, MB, Techcombank...) và Ví điện tử.
-                </p>
-
-                <!-- Khung hiển thị ảnh QR BIDV -->
-                <div class="relative inline-block mx-auto p-3 bg-white rounded-2xl shadow-md border-2 border-skytheme-200 max-w-[250px] group">
-                    <img id="qrBidvImg" src="assets/qr_bidv.jpg" alt="Mã QR Ngân hàng BIDV - Dương Minh Tiến" class="w-full h-auto rounded-xl object-contain group-hover:scale-105 transition-transform duration-300">
-                    <div class="absolute -bottom-2 -right-2 bg-skytheme-600 text-white p-1.5 rounded-full shadow-md border-2 border-white">
-                        <i class="fas fa-shield-halved text-xs"></i>
-                    </div>
-                </div>
-
-                <!-- Nút tác vụ ngân hàng -->
-                <div class="grid grid-cols-2 gap-3 pt-2">
-                    <button onclick="copySTK(event)" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-skytheme-600 to-skytheme-700 hover:from-skytheme-700 hover:to-skytheme-800 active:scale-95 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md transition-all">
-                        <i class="far fa-copy text-sm"></i>
-                        <span>Copy Số TK</span>
-                    </button>
-                    
-                    <a href="assets/qr_bidv.jpg" download="BIDV_DUONG_MINH_TIEN_1320638776.jpg" class="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-skytheme-50 active:scale-95 text-skytheme-800 font-bold text-xs flex items-center justify-center gap-1.5 shadow-md transition-all border border-skytheme-200">
-                        <i class="fas fa-download text-sm text-skytheme-600"></i>
-                        <span>Tải Mã QR</span>
-                    </a>
-                </div>
-
-                <!-- Bảng chi tiết chuyển khoản -->
-                <div class="bg-skytheme-50/90 rounded-2xl p-3.5 text-left text-xs space-y-2 border border-skytheme-200/90 font-mono">
-                    <div class="flex justify-between items-center">
-                        <span class="text-skytheme-600">Ngân hàng:</span>
-                        <span class="font-bold text-skytheme-900">BIDV (Đầu tư & Phát triển VN)</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-skytheme-600">Tên người nhận:</span>
-                        <span class="font-bold text-skytheme-950">DUONG MINH TIEN</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-skytheme-600">Số tài khoản:</span>
-                        <span class="font-mono font-bold text-skytheme-700 text-sm">1320638776</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================================================================= -->
-        <!-- 4. NỘI DUNG TAB: MẠNG XÃ HỘI (SOCIAL CONNECT)                     -->
-        <!-- ================================================================= -->
-        <section id="tab-social" class="tab-content space-y-3.5">
-            
-            <!-- Thẻ Zalo Cá Nhân -->
-            <div class="interactive-card rounded-2xl p-4 flex items-center justify-between group">
-                <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-xl bg-skytheme-100 flex items-center justify-center border border-skytheme-200 flex-shrink-0 group-hover:scale-105 transition-transform">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-7 h-7">
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-skytheme-950 text-sm sm:text-base">Zalo Cá Nhân</h3>
-                        <p class="text-xs text-skytheme-600 mt-0.5">Mở cuộc trò chuyện</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center gap-2">
-                    <button onclick="openQrModal('Mã QR Zalo - Dương Minh Tiến', 'assets/qr_zalo.png', 'Quét bằng camera hoặc ứng dụng Zalo trên điện thoại để kết nối')" title="Xem mã QR Zalo" class="w-9 h-9 rounded-xl bg-skytheme-100 hover:bg-skytheme-200 text-skytheme-800 flex items-center justify-center transition-colors">
-                        <i class="fas fa-qrcode text-sm"></i>
-                    </button>
-                    <a href="https://zaloapp.com/qr/p/ryjl1ppheuhg" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-skytheme-600 hover:bg-skytheme-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all active:scale-95">
-                        <span>Nhắn tin</span>
-                        <i class="fas fa-arrow-up-right-from-square text-[10px] text-skytheme-200"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Thẻ Telegram Cá Nhân -->
-            <div class="interactive-card rounded-2xl p-4 flex items-center justify-between group">
-                <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center border border-sky-200 flex-shrink-0 group-hover:scale-105 transition-transform">
-                        <i class="fab fa-telegram text-2xl text-sky-500"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-skytheme-950 text-sm sm:text-base">Telegram</h3>
-                        <p class="text-xs font-mono text-skytheme-700 font-medium mt-0.5">@DMTIEN0308</p>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-2">
-                    <button onclick="openQrModal('Thẻ Telegram - @DMTIEN0308', 'assets/qr_telegram.png', 'Mở camera hoặc ứng dụng Telegram quét mã để bắt đầu trò chuyện')" title="Xem mã QR Telegram" class="w-9 h-9 rounded-xl bg-skytheme-100 hover:bg-skytheme-200 text-skytheme-800 flex items-center justify-center transition-colors">
-                        <i class="fas fa-qrcode text-sm"></i>
-                    </button>
-                    <a href="https://t.me/DMTIEN0308" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all active:scale-95">
-                        <span>Nhắn tin</span>
-                        <i class="fab fa-telegram-plane text-[11px] text-sky-200"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Thẻ Facebook -->
-            <div class="interactive-card rounded-2xl p-4 flex items-center justify-between group">
-                <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-xl bg-skytheme-50 flex items-center justify-center border border-skytheme-200 flex-shrink-0 group-hover:scale-105 transition-transform">
-                        <i class="fab fa-facebook-f text-lg text-blue-600"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-skytheme-950 text-sm sm:text-base">Facebook</h3>
-                        <p class="text-xs text-skytheme-600 mt-0.5">Kết nối trang Facebook cá nhân</p>
-                    </div>
-                </div>
-
-                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all active:scale-95">
-                    <span>Nhắn tin</span>
-                    <i class="fas fa-arrow-up-right-from-square text-[10px] text-blue-200"></i>
-                </a>
-            </div>
-
-            <!-- Thẻ Email Liên Hệ -->
-            <div class="interactive-card rounded-2xl p-4 flex items-center justify-between group">
-                <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-xl bg-skytheme-50 flex items-center justify-center border border-skytheme-200 flex-shrink-0 group-hover:scale-105 transition-transform">
-                        <i class="fas fa-envelope text-lg text-skytheme-600"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-skytheme-950 text-sm sm:text-base">Hòm Thư Email</h3>
-                        <p class="text-xs font-mono text-skytheme-600 mt-0.5">hall9.27022019@gmail.com</p>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-2">
-                    <button onclick="copyToClipboard('hall9.27022019@gmail.com', 'Đã sao chép email: hall9.27022019@gmail.com!')" class="px-3.5 py-2 rounded-xl bg-white border border-skytheme-200 hover:bg-skytheme-50 text-skytheme-800 text-xs font-semibold flex items-center gap-1.5 transition-all active:scale-95">
-                        <i class="far fa-copy text-skytheme-600"></i>
-                        <span>Copy Mail</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================================================================= -->
-        <!-- 5. NỘI DUNG TAB: GIỚI THIỆU (ABOUT ME)                            -->
-        <!-- ================================================================= -->
-        <section id="tab-about" class="tab-content space-y-4">
-            <div class="glass-panel rounded-3xl p-5 sm:p-7 space-y-5 shadow-lg about-profile-box">
-                
-                <div class="border-b border-skytheme-200 pb-3">
-                    <h2 class="text-lg font-bold text-skytheme-950 flex items-center gap-2">
-                        <i class="fas fa-id-card text-skytheme-600"></i>
-                        <span>Hồ Sơ Cá Nhân</span>
-                    </h2>
-                    <p class="text-xs text-skytheme-600 mt-0.5">Thông tin cơ bản về Dương Minh Tiến</p>
-                </div>
-
-                <!-- Danh sách thông tin -->
-                <div class="space-y-2.5">
-                    <div class="about-info-item flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
-                        <div class="w-10 h-10 rounded-xl bg-skytheme-100 text-skytheme-700 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-user text-sm"></i>
+        <div class="panels">
+            <!-- Social -->
+            <section id="tab-social" role="tabpanel" aria-labelledby="btn-tab-social" class="panel active">
+                <h2 class="sr-only">Mạng xã hội</h2>
+                <div class="sheet list">
+                    <div class="row">
+                        <span class="mark"><img src="assets/zalo.svg" alt=""></span>
+                        <div class="row-text">
+                            <h3>Zalo</h3>
+                            <p>Mở cuộc trò chuyện</p>
                         </div>
-                        <div>
-                            <span class="text-[10px] font-mono text-skytheme-500 block uppercase">Họ và tên</span>
-                            <span class="text-sm font-bold text-skytheme-950">Dương Minh Tiến</span>
+                        <div class="row-actions">
+                            <button onclick="openQrModal('Mã QR Zalo - Dương Minh Tiến', 'assets/qr_zalo.png', 'Quét bằng camera hoặc ứng dụng Zalo trên điện thoại để kết nối', 'QR_Zalo_Duong_Minh_Tien.png')" class="btn-icon" title="Xem mã QR Zalo" aria-label="Xem mã QR Zalo">
+                                <svg class="ic"><use href="#i-qr"/></svg>
+                            </button>
+                            <a href="https://zaloapp.com/qr/p/ryjl1ppheuhg" target="_blank" rel="noopener noreferrer" class="btn btn-second">
+                                <svg class="ic"><use href="#i-chat"/></svg>Nhắn tin
+                            </a>
                         </div>
                     </div>
-
-                    <div class="about-info-item flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
-                        <div class="w-10 h-10 rounded-xl bg-skytheme-100 text-skytheme-700 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-cake-candles text-sm"></i>
+                    <div class="row">
+                        <span class="mark">
+                            <svg viewBox="0 0 24 24" fill="#229ED9" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.16-1.86 8.78c-.14.62-.5.77-1.02.48l-2.82-2.08-1.36 1.31c-.15.15-.28.28-.57.28l.2-2.87 5.22-4.72c.23-.2-.05-.31-.35-.11l-6.45 4.06-2.78-.87c-.6-.19-.61-.6.13-.89l10.86-4.19c.5-.18.94.12.8.82z"/></svg>
+                        </span>
+                        <div class="row-text">
+                            <h3>Telegram</h3>
+                            <p class="mono">@DMTIEN0308</p>
                         </div>
-                        <div>
-                            <span class="text-[10px] font-mono text-skytheme-500 block uppercase">Sinh nhật</span>
-                            <span class="text-sm font-bold text-skytheme-950 font-mono">14/07/2004</span>
-                        </div>
-                    </div>
-
-                    <div class="about-info-item flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
-                        <div class="w-10 h-10 rounded-xl bg-skytheme-100 text-skytheme-700 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-compass text-sm"></i>
-                        </div>
-                        <div>
-                            <span class="text-[10px] font-mono text-skytheme-500 block uppercase">Cung hoàng đạo</span>
-                            <span class="text-sm font-bold text-skytheme-950">Cự Giải (Cancer ♋)</span>
+                        <div class="row-actions">
+                            <button onclick="openQrModal('Thẻ Telegram - @DMTIEN0308', 'assets/qr_telegram.png', 'Mở camera hoặc ứng dụng Telegram quét mã để bắt đầu trò chuyện', 'QR_Telegram_DMTIEN0308.png')" class="btn-icon" title="Xem mã QR Telegram" aria-label="Xem mã QR Telegram">
+                                <svg class="ic"><use href="#i-qr"/></svg>
+                            </button>
+                            <a href="https://t.me/DMTIEN0308" target="_blank" rel="noopener noreferrer" class="btn btn-second">
+                                <svg class="ic"><use href="#i-send"/></svg>Nhắn tin
+                            </a>
                         </div>
                     </div>
-
-                    <div class="about-info-item flex items-center gap-3 p-3 rounded-2xl bg-white/90 border border-skytheme-200">
-                        <div class="w-10 h-10 rounded-xl bg-skytheme-100 text-skytheme-700 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-envelope text-sm"></i>
+                    <div class="row">
+                        <span class="mark">
+                            <svg viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.09 24 18.1 24 12.07z"/></svg>
+                        </span>
+                        <div class="row-text">
+                            <h3>Facebook</h3>
+                            <p>Trang cá nhân</p>
                         </div>
-                        <div>
-                            <span class="text-[10px] font-mono text-skytheme-500 block uppercase">Hòm thư Email</span>
-                            <span class="text-sm font-bold text-skytheme-950 font-mono">hall9.27022019@gmail.com</span>
+                        <div class="row-actions">
+                            <a href="https://www.facebook.com/profile.php?id=61591531234567" target="_blank" rel="noopener noreferrer" class="btn-icon" title="Xem trang Facebook" aria-label="Xem trang Facebook">
+                                <svg class="ic"><use href="#i-arrow"/></svg>
+                            </a>
+                            <a href="https://m.me/61591531234567" target="_blank" rel="noopener noreferrer" class="btn btn-second">
+                                <svg class="ic"><use href="#i-chat"/></svg>Nhắn tin
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="mark" style="color:var(--secondary)">
+                            <svg class="ic" style="width:24px;height:24px"><use href="#i-mail"/></svg>
+                        </span>
+                        <div class="row-text">
+                            <h3>Email</h3>
+                            <p class="mono">hall9.27022019@gmail.com</p>
+                        </div>
+                        <div class="row-actions">
+                            <button onclick="copyToClipboard('hall9.27022019@gmail.com', 'Đã sao chép email')" class="btn-icon ripple-host" title="Sao chép email" aria-label="Sao chép email">
+                                <svg class="ic"><use href="#i-copy"/></svg>
+                            </button>
+                            <a href="mailto:hall9.27022019@gmail.com" class="btn btn-second">
+                                <svg class="ic"><use href="#i-send"/></svg>Gửi mail
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        </div><!-- KẾT THÚC TABS-VIEWPORT -->
+            </section>
 
-        <!-- FOOTER BẢN QUYỀN -->
-        <footer class="text-center py-4 text-xs font-mono text-skytheme-600/80 space-y-1">
-            <p>© 2026 <strong>DƯƠNG MINH TIẾN</strong>. All rights reserved.</p>
-            <p class="text-[10px] text-skytheme-500 uppercase tracking-wider">
-                Sky Blue Glassmorphism Edition
-            </p>
-        </footer>
+            <!-- Banking: the airmail envelope -->
+            <section id="tab-banking" role="tabpanel" aria-labelledby="btn-tab-banking" class="panel">
+                <div class="sheet envelope">
+                    <div class="airmail" aria-hidden="true"></div>
+                    <div class="env-body">
+                        <h2>Quét VietQR để chuyển khoản</h2>
+                        <p class="env-sub">Mọi ứng dụng ngân hàng và ví điện tử đều quét được</p>
+                        <div class="stamp-zone">
+                            <div class="stamp">
+                                <img id="qrBidvImg" src="assets/qr_bidv_qr.png" alt="Mã QR Ngân hàng BIDV - Dương Minh Tiến">
+                            </div>
+                        </div>
+                        <div class="env-actions">
+                            <button onclick="copySTK(event)" class="btn btn-primary ripple-host">
+                                <svg class="ic"><use href="#i-copy"/></svg>Copy số TK
+                            </button>
+                            <a href="assets/qr_bidv.jpg" download="BIDV_DUONG_MINH_TIEN_1320638776.jpg" class="btn btn-second">
+                                <svg class="ic"><use href="#i-download"/></svg>Tải mã QR
+                            </a>
+                        </div>
+                        <dl class="doc">
+                            <div class="doc-row"><dt class="mono">Ngân hàng</dt><dd>BIDV</dd></div>
+                            <div class="doc-row"><dt class="mono">Tên người nhận</dt><dd>DUONG MINH TIEN</dd></div>
+                            <div class="doc-row"><dt class="mono">Số tài khoản</dt><dd class="mono big">1320638776</dd></div>
+                        </dl>
+                        <p class="note">
+                            <svg class="ic"><use href="#i-info"/></svg>
+                            <span>Đối chiếu tên người nhận DUONG MINH TIEN trong ứng dụng ngân hàng trước khi xác nhận</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About -->
+            <section id="tab-about" role="tabpanel" aria-labelledby="btn-tab-about" class="panel">
+                <div class="sheet about">
+                    <h2>Hồ sơ cá nhân</h2>
+                    <p class="intro">Mình là Tiến, sinh năm 2004, cung Cự Giải. Trang này gom mọi kênh liên lạc chính chủ của mình: cần chuyển khoản thì quét VietQR, cần trò chuyện thì Zalo và Telegram luôn mở.</p>
+
+                    <div class="player">
+                        <div class="player-row">
+                            <button onclick="toggleAudio()" id="btnPlayPause" class="play-btn" title="Phát / Tạm dừng" aria-label="Phát hoặc tạm dừng nhạc">
+                                <svg class="ic" id="playIcon"><use href="#i-play"/></svg>
+                            </button>
+                            <div class="track">
+                                <p class="track-title">Đã Lỡ Yêu Em Nhiều</p>
+                                <p class="track-meta mono">JustaTee</p>
+                            </div>
+                            <div class="eq" id="equalizerWave" aria-hidden="true"><span></span><span></span><span></span></div>
+                            <button onclick="toggleMute()" id="btnMute" class="mute-btn" title="Tắt / Bật tiếng" aria-label="Tắt hoặc bật tiếng" aria-pressed="false">
+                                <svg class="ic" id="muteIcon"><use href="#i-vol"/></svg>
+                            </button>
+                        </div>
+                        <div id="musicProgressWrap" class="seek" role="slider" tabindex="0" aria-label="Tua bài hát" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" title="Bấm để tua">
+                            <div class="seek-track"><div id="musicProgressBar"></div></div>
+                        </div>
+                    </div>
+
+                    <audio id="bgAudio" loop preload="metadata">
+                        <source src="assets/da_lo_yeu_em_nhieu.mp3" type="audio/mp3">
+                        <source src="assets/da_lo_yeu_em_nhieu.webm" type="audio/webm">
+                    </audio>
+
+                    <dl class="facts">
+                        <div class="fact"><dt class="mono">Họ và tên</dt><dd>Dương Minh Tiến</dd></div>
+                        <div class="fact"><dt class="mono">Sinh nhật</dt><dd class="mono">14/07/2004</dd></div>
+                        <div class="fact"><dt class="mono">Cung hoàng đạo</dt><dd>Cự Giải</dd></div>
+                    </dl>
+                </div>
+            </section>
+        </div>
+
+        <footer class="mono">© 2026 Dương Minh Tiến — trang liên hệ chính chủ</footer>
     </main>
 
-    <!-- ==================== POPUP MODAL XEM ẢNH QR ==================== -->
-    <div id="qrModal" class="hidden-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-skytheme-950/60 backdrop-blur-sm">
-        <div class="glass-panel w-full max-w-sm rounded-3xl p-6 text-center space-y-4 shadow-2xl relative animate-in fade-in zoom-in">
-            <button onclick="closeQrModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-skytheme-100 hover:bg-skytheme-200 text-skytheme-800 flex items-center justify-center transition-colors">
-                <i class="fas fa-times text-xs"></i>
+    <!-- QR modal -->
+    <div id="qrModal" class="hidden-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-sheet">
+            <button onclick="closeQrModal()" id="modalCloseBtn" class="btn-icon" style="position:absolute;top:12px;right:12px" aria-label="Đóng">
+                <svg class="ic"><use href="#i-x"/></svg>
             </button>
-
-            <h3 id="modalTitle" class="font-bold text-skytheme-950 text-base pr-6 font-mono">Mã QR</h3>
-
-            <div class="bg-white p-3 rounded-2xl shadow-inner border border-skytheme-200 flex items-center justify-center min-h-[220px]">
-                <img id="modalImg" src="" alt="Mã QR" class="max-h-72 w-auto object-contain rounded-xl">
-            </div>
-
-            <p id="modalDesc" class="text-xs text-skytheme-600 leading-relaxed font-mono"></p>
-
-            <div class="flex gap-2 pt-2">
-                <a id="modalDownloadBtn" href="" download="QR_Code.png" class="flex-1 py-2.5 px-4 rounded-xl bg-skytheme-600 hover:bg-skytheme-700 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors shadow-sm">
-                    <i class="fas fa-download"></i>
-                    <span>Tải ảnh về máy</span>
+            <h3 id="modalTitle">Mã QR</h3>
+            <div class="modal-frame"><img id="modalImg" src="assets/qr_zalo.png" alt="Mã QR"></div>
+            <p id="modalDesc"></p>
+            <div class="modal-actions">
+                <a id="modalDownloadBtn" href="assets/qr_zalo.png" download="QR_Zalo_Duong_Minh_Tien.png" class="btn btn-primary">
+                    <svg class="ic"><use href="#i-download"/></svg>Tải ảnh về máy
                 </a>
-                <button onclick="closeQrModal()" class="py-2.5 px-4 rounded-xl bg-skytheme-100 hover:bg-skytheme-200 text-skytheme-800 text-xs font-semibold transition-colors">
-                    Đóng
-                </button>
+                <button onclick="closeQrModal()" class="btn btn-second">Đóng</button>
             </div>
         </div>
     </div>
 
-    <!-- ==================== TOAST NOTIFICATION (THÔNG BÁO SAO CHÉP) ==================== -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-skytheme-900 text-white text-xs sm:text-sm font-semibold shadow-2xl border border-skytheme-400 font-mono">
-        <i class="fas fa-circle-check text-skytheme-300 text-sm"></i>
-        <span id="toastMsg">Đã sao chép vào bộ nhớ tạm!</span>
+    <div id="toast" role="status" aria-live="polite">
+        <svg class="ic" id="toastIcon"><use href="#i-check"/></svg>
+        <span id="toastMsg">Đã sao chép vào bộ nhớ tạm</span>
     </div>
 
-    <!-- ==================== JAVASCRIPT ĐIỀU KHIỂN & HIỆU ỨNG ==================== -->
     <script>
-        // THỨ TỰ CÁC TAB THEO CHIỀU TỪ TRÁI SANG PHẢI TRÊN GIAO DIỆN
         const TAB_ORDER = ['social', 'banking', 'about'];
-        let currentActiveTab = 'banking'; // Tab mặc định khi mở web
+        let currentActiveTab = 'social';
+        const $ = id => document.getElementById(id);
 
-        // Helper: đặt vị trí viên thuốc xanh đúng theo button đang active
-        function movePill(tabName) {
-            const pill = document.getElementById('tab-indicator');
-            const btn  = document.getElementById(`btn-tab-${tabName}`);
-            if (!pill || !btn) return;
-            // dùng offsetLeft/Top so với nav (parentElement) để tính chính xác, không bị ảnh hưởng bởi scroll
-            pill.style.width     = btn.offsetWidth  + 'px';
-            pill.style.height    = btn.offsetHeight + 'px';
-            pill.style.left      = '0px';            // transform tính từ left=0
-            pill.style.top       = btn.offsetTop + 'px';
-            pill.style.transform = `translateX(${btn.offsetLeft}px)`;
+        function moveLine(tabName) {
+            const line = $('tab-indicator');
+            const btn = $('btn-tab-' + tabName);
+            if (!line || !btn) return;
+            line.style.width = btn.offsetWidth + 'px';
+            line.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
         }
 
-        // 1. Chuyển đổi giữa các Tab — Sliding pill + trượt ngang nội dung
-        function switchTab(tabName) {
-            const oldIndex = TAB_ORDER.indexOf(currentActiveTab);
+        function switchTab(tabName, updateHash = true) {
             const newIndex = TAB_ORDER.indexOf(tabName);
             if (newIndex === -1 || tabName === currentActiveTab) return;
-
-            // Hướng trượt: newIndex > oldIndex → nội dung mới từ bên phải vào
-            //              newIndex < oldIndex → nội dung mới từ bên trái vào
-            const slideClass = newIndex > oldIndex ? 'slide-from-right' : 'slide-from-left';
-
             currentActiveTab = tabName;
-
             TAB_ORDER.forEach(name => {
-                const content = document.getElementById(`tab-${name}`);
-                const btn     = document.getElementById(`btn-tab-${name}`);
-
-                if (name === tabName) {
-                    // Kích hoạt tab mới: hiển thị + slide animation
-                    content.classList.remove('slide-from-right', 'slide-from-left');
-                    void content.offsetWidth; // reflow để reset animation
-                    content.classList.add('active', slideClass);
-                    btn.classList.add('active');
-                } else {
-                    // Ẩn các tab còn lại
-                    content.classList.remove('active', 'slide-from-right', 'slide-from-left');
-                    btn.classList.remove('active');
-                }
+                const content = $('tab-' + name);
+                const btn = $('btn-tab-' + name);
+                const on = name === tabName;
+                content.classList.toggle('active', on);
+                btn.setAttribute('aria-selected', String(on));
+                btn.tabIndex = on ? 0 : -1;
             });
-
-            // Trượt viên thuốc xanh sang button mới
-            movePill(tabName);
+            moveLine(tabName);
+            if (updateHash) history.replaceState(null, '', '#' + tabName);
         }
 
-        // Khởi tạo pill ngay sau khi DOM sẵn sàng
-        window.addEventListener('DOMContentLoaded', () => {
-            requestAnimationFrame(() => {
-                const pill = document.getElementById('tab-indicator');
-                // Tắt transition để pill xuất hiện ngay tại vị trí đúng, không animate từ 0
-                if (pill) pill.style.transition = 'none';
-                movePill('banking');
-                // Bật lại transition sau 1 frame
-                requestAnimationFrame(() => {
-                    if (pill) pill.style.transition = '';
-                });
-            });
-            window.addEventListener('resize', () => movePill(currentActiveTab));
+        $('tabBar').addEventListener('keydown', e => {
+            const idx = TAB_ORDER.indexOf(currentActiveTab);
+            let next = null;
+            if (e.key === 'ArrowRight') next = TAB_ORDER[(idx + 1) % TAB_ORDER.length];
+            else if (e.key === 'ArrowLeft') next = TAB_ORDER[(idx + TAB_ORDER.length - 1) % TAB_ORDER.length];
+            else if (e.key === 'Home') next = TAB_ORDER[0];
+            else if (e.key === 'End') next = TAB_ORDER[TAB_ORDER.length - 1];
+            if (next) {
+                e.preventDefault();
+                switchTab(next);
+                $('btn-tab-' + next).focus();
+            }
         });
 
-        // 2. Sao chép số tài khoản BIDV kèm hiệu ứng pháo hoa
-        function copySTK(event) {
-            const stk = "1320638776";
-            navigator.clipboard.writeText(stk).then(() => {
-                showToast("Đã sao chép STK BIDV: " + stk);
-                createRipple(event);
-            }).catch(err => {
-                prompt("Hãy sao chép số tài khoản BIDV:", stk);
-            });
+        window.addEventListener('hashchange', () => {
+            const h = location.hash.slice(1);
+            if (TAB_ORDER.includes(h) && h !== currentActiveTab) switchTab(h, false);
+        });
+
+        // ---------- Copy ----------
+        async function copyText(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                try { await navigator.clipboard.writeText(text); return true; } catch (e) { /* fallback below */ }
+            }
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.setAttribute('readonly', '');
+                ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+                document.body.appendChild(ta);
+                ta.select();
+                const ok = document.execCommand('copy');
+                ta.remove();
+                return ok;
+            } catch (e) { return false; }
         }
 
-        // Tạo hiệu ứng sóng gợn nhẹ khi click
-        function createRipple(event) {
-            if (!event) return;
-            const btn = event.currentTarget;
-            const circle = document.createElement("span");
-            const diameter = Math.max(btn.clientWidth, btn.clientHeight);
-            const radius = diameter / 2;
-            
+        function spawnRipple(btn, x, y) {
+            if (!btn) return;
             const rect = btn.getBoundingClientRect();
-            circle.style.width = circle.style.height = `${diameter}px`;
-            circle.style.left = `${event.clientX - rect.left - radius}px`;
-            circle.style.top = `${event.clientY - rect.top - radius}px`;
-            circle.classList.add("ripple");
-            
-            const rippleStyle = document.createElement("style");
-            rippleStyle.innerHTML = `
-                .ripple {
-                    position: absolute;
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: rippleAnim 0.6s linear;
-                    background-color: rgba(255, 255, 255, 0.7);
-                    pointer-events: none;
-                }
-                @keyframes rippleAnim {
-                    to { transform: scale(3.5); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(rippleStyle);
-
-            const oldRipple = btn.getElementsByClassName("ripple")[0];
-            if (oldRipple) oldRipple.remove();
+            const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+            const circle = document.createElement('span');
+            circle.style.width = circle.style.height = diameter + 'px';
+            circle.style.left = (x - rect.left - diameter / 2) + 'px';
+            circle.style.top = (y - rect.top - diameter / 2) + 'px';
+            circle.classList.add('ripple');
+            const old = btn.getElementsByClassName('ripple')[0];
+            if (old) old.remove();
             btn.appendChild(circle);
+            setTimeout(() => circle.remove(), 550);
         }
 
-        // 3. Sao chép nội dung bất kỳ
-        function copyToClipboard(text, message) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast(message || "Đã sao chép vào bộ nhớ tạm!");
-            }).catch(err => {
-                prompt("Hãy sao chép nội dung:", text);
-            });
+        async function copySTK(event) {
+            const btn = event.currentTarget;
+            const x = event.clientX, y = event.clientY;
+            const stk = '1320638776';
+            const ok = await copyText(stk);
+            if (ok) {
+                showToast('Đã sao chép số tài khoản BIDV ' + stk);
+                spawnRipple(btn, x, y);
+            } else {
+                showToast('Không sao chép được, số tài khoản ' + stk, 'error');
+            }
         }
 
-        // 4. Hiển thị Toast thông báo
+        async function copyToClipboard(text, message) {
+            const ok = await copyText(text);
+            showToast(ok ? (message || 'Đã sao chép vào bộ nhớ tạm') : ('Không sao chép được ' + text), ok ? 'success' : 'error');
+        }
+
         let toastTimeout;
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toastMsg');
-            
-            toastMsg.innerText = message;
+        function showToast(message, type = 'success') {
+            const toast = $('toast');
+            $('toastMsg').innerText = message;
+            $('toastIcon').firstElementChild.setAttribute('href', type === 'error' ? '#i-info' : '#i-check');
+            toast.classList.toggle('error', type === 'error');
             toast.classList.add('show');
-            
             clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
+            toastTimeout = setTimeout(() => toast.classList.remove('show'), 2600);
         }
 
-        // 5. Mở và Đóng Modal hiển thị mã QR
-        function openQrModal(title, imgSrc, desc) {
-            const modal = document.getElementById('qrModal');
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalImg').src = imgSrc;
-            document.getElementById('modalDesc').innerText = desc || '';
-            document.getElementById('modalDownloadBtn').href = imgSrc;
-            
+        // ---------- QR modal ----------
+        let lastFocused = null;
+        function openQrModal(title, imgSrc, desc, filename) {
+            const modal = $('qrModal');
+            $('modalTitle').innerText = title;
+            $('modalImg').src = imgSrc;
+            $('modalImg').alt = title;
+            $('modalDesc').innerText = desc || '';
+            $('modalDownloadBtn').href = imgSrc;
+            $('modalDownloadBtn').download = filename || 'QR_Code.png';
+            lastFocused = document.activeElement;
             modal.classList.remove('hidden-modal');
             modal.classList.add('active-modal');
+            document.body.classList.add('modal-open');
+            document.addEventListener('keydown', modalKeydown);
+            // second frame: visibility transition leaves hidden, focus lands
+            requestAnimationFrame(() => requestAnimationFrame(() => $('modalCloseBtn').focus()));
         }
 
         function closeQrModal() {
-            const modal = document.getElementById('qrModal');
+            const modal = $('qrModal');
             modal.classList.remove('active-modal');
             modal.classList.add('hidden-modal');
+            document.body.classList.remove('modal-open');
+            document.removeEventListener('keydown', modalKeydown);
+            if (lastFocused && lastFocused.focus) lastFocused.focus();
         }
 
-        window.addEventListener('click', function(e) {
-            const modal = document.getElementById('qrModal');
-            if (e.target === modal) {
-                closeQrModal();
-            }
+        function modalKeydown(e) {
+            if (e.key === 'Escape') { closeQrModal(); return; }
+            if (e.key !== 'Tab') return;
+            const focusables = Array.from($('qrModal').querySelectorAll('button, a[href]'));
+            if (!focusables.length) return;
+            const first = focusables[0], last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+
+        window.addEventListener('click', e => {
+            const modal = $('qrModal');
+            if (e.target === modal && modal.classList.contains('active-modal')) closeQrModal();
         });
 
-        // 6. Chia sẻ trang cá nhân
+        // ---------- Share ----------
         function shareProfile() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Dương Minh Tiến — Trang Thông Tin & Chuyển Khoản BIDV',
-                    text: 'Trang thông tin cá nhân và chuyển khoản ngân hàng BIDV của Dương Minh Tiến',
+                    title: 'Dương Minh Tiến — Trang Liên Hệ Chính Chủ & Chuyển Khoản VietQR',
+                    text: 'Quét để chuyển khoản, chạm để kết nối — trang chính chủ của Dương Minh Tiến.',
                     url: window.location.href,
-                }).catch((error) => console.log('Chia sẻ bị hủy', error));
+                }).catch(() => {});
             } else {
-                copyToClipboard(window.location.href, 'Đã sao chép liên kết trang cá nhân!');
+                copyToClipboard(window.location.href, 'Đã sao chép liên kết trang');
             }
         }
 
-        // 7. Hiệu ứng 3D Parallax Tilt cho Thẻ BIDV khi di chuột
-        const bidvCard = document.getElementById('bidvCard');
-        if (bidvCard && window.innerWidth > 768) {
-            bidvCard.addEventListener('mousemove', (e) => {
-                const rect = bidvCard.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                
-                const rotateX = -(y / rect.height) * 16;
-                const rotateY = (x / rect.width) * 16;
-                
-                bidvCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            });
+        // ---------- Music (off by default) ----------
+        const bgAudio = $('bgAudio');
+        const equalizerWave = $('equalizerWave');
+        const musicProgressBar = $('musicProgressBar');
+        const musicProgressWrap = $('musicProgressWrap');
+        bgAudio.volume = 0.85;
 
-            bidvCard.addEventListener('mouseleave', () => {
-                bidvCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-            });
-        }
-
-        // ==================== ĐIỀU KHIỂN ÂM NHẠC TỰ ĐỘNG (AUTOPLAY WIDGET) ====================
-        const bgAudio = document.getElementById('bgAudio');
-        const playIcon = document.getElementById('playIcon');
-        const muteIcon = document.getElementById('muteIcon');
-        const vinylDisc = document.getElementById('vinylDisc');
-        const equalizerWave = document.getElementById('equalizerWave');
-        const musicProgressBar = document.getElementById('musicProgressBar');
-
-        let isPlaying = false;
-        let audioStarted = false;
+        function setUse(id, ref) { $(id).firstElementChild.setAttribute('href', ref); }
 
         function updateMusicUI(playing) {
-            isPlaying = playing;
-            if (playing) {
-                playIcon.className = 'fas fa-pause text-xs';
-                if (vinylDisc) vinylDisc.style.animationPlayState = 'running';
-                if (equalizerWave) {
-                    equalizerWave.querySelectorAll('span').forEach(s => s.style.animationPlayState = 'running');
-                }
-            } else {
-                playIcon.className = 'fas fa-play text-xs pl-0.5';
-                if (vinylDisc) vinylDisc.style.animationPlayState = 'paused';
-                if (equalizerWave) {
-                    equalizerWave.querySelectorAll('span').forEach(s => s.style.animationPlayState = 'paused');
-                }
-            }
+            setUse('playIcon', playing ? '#i-pause' : '#i-play');
+            equalizerWave.classList.toggle('live', playing);
         }
 
         function toggleAudio() {
             if (bgAudio.paused) {
-                bgAudio.play().then(() => {
-                    updateMusicUI(true);
-                }).catch(err => console.log('Lỗi phát nhạc:', err));
+                bgAudio.play().catch(() => showToast('Không phát được nhạc, thử lại sau', 'error'));
             } else {
                 bgAudio.pause();
-                updateMusicUI(false);
             }
         }
 
         function toggleMute() {
             bgAudio.muted = !bgAudio.muted;
-            if (bgAudio.muted) {
-                muteIcon.className = 'fas fa-volume-xmark text-xs text-red-400';
-            } else {
-                muteIcon.className = 'fas fa-volume-high text-xs';
-            }
+            setUse('muteIcon', bgAudio.muted ? '#i-vol-x' : '#i-vol');
+            $('btnMute').setAttribute('aria-pressed', String(bgAudio.muted));
         }
 
-        bgAudio.addEventListener('timeupdate', () => {
-            if (bgAudio.duration) {
+        function updateProgress() {
+            if (bgAudio.duration && isFinite(bgAudio.duration)) {
                 const percent = (bgAudio.currentTime / bgAudio.duration) * 100;
                 musicProgressBar.style.width = percent + '%';
+                musicProgressWrap.setAttribute('aria-valuenow', String(Math.round(percent)));
             }
+        }
+        bgAudio.addEventListener('timeupdate', updateProgress);
+        bgAudio.addEventListener('play', () => updateMusicUI(true));
+        bgAudio.addEventListener('pause', () => updateMusicUI(false));
+
+        function seekTo(pct) {
+            if (bgAudio.duration && isFinite(bgAudio.duration)) {
+                bgAudio.currentTime = Math.min(Math.max(pct, 0), 1) * bgAudio.duration;
+                updateProgress();
+            }
+        }
+        musicProgressWrap.addEventListener('click', e => {
+            const rect = musicProgressWrap.getBoundingClientRect();
+            seekTo((e.clientX - rect.left) / rect.width);
+        });
+        musicProgressWrap.addEventListener('keydown', e => {
+            if (!bgAudio.duration || !isFinite(bgAudio.duration)) return;
+            if (e.key === 'ArrowRight') { e.preventDefault(); seekTo((bgAudio.currentTime + 5) / bgAudio.duration); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); seekTo((bgAudio.currentTime - 5) / bgAudio.duration); }
+            else if (e.key === 'Home') { e.preventDefault(); seekTo(0); }
+            else if (e.key === 'End') { e.preventDefault(); seekTo(1); }
         });
 
-        function startAutoplay() {
-            if (audioStarted) return;
-            bgAudio.volume = 0.85;
-            
-            const promise = bgAudio.play();
-            if (promise !== undefined) {
-                promise.then(() => {
-                    audioStarted = true;
-                    updateMusicUI(true);
-                    cleanupGestures();
-                }).catch(() => {
-                    setupGesturePlay();
-                });
-            }
-        }
-
-        function onFirstUserGesture() {
-            if (!audioStarted) {
-                bgAudio.play().then(() => {
-                    audioStarted = true;
-                    updateMusicUI(true);
-                }).catch(err => console.log('Chờ cử chỉ tiếp theo:', err));
-            }
-            cleanupGestures();
-        }
-
-        function setupGesturePlay() {
-            window.addEventListener('click', onFirstUserGesture, { once: true });
-            window.addEventListener('touchstart', onFirstUserGesture, { once: true });
-            window.addEventListener('scroll', onFirstUserGesture, { once: true });
-            window.addEventListener('keydown', onFirstUserGesture, { once: true });
-        }
-
-        function cleanupGestures() {
-            window.removeEventListener('click', onFirstUserGesture);
-            window.removeEventListener('touchstart', onFirstUserGesture);
-            window.removeEventListener('scroll', onFirstUserGesture);
-            window.removeEventListener('keydown', onFirstUserGesture);
-        }
-
-        // Tự động khởi động khi tải trang
+        // ---------- Init ----------
         window.addEventListener('DOMContentLoaded', () => {
-            startAutoplay();
-        });
-        window.addEventListener('load', () => {
-            if (!audioStarted) startAutoplay();
+            requestAnimationFrame(() => {
+                const line = $('tab-indicator');
+                if (line) line.style.transition = 'none';
+                // Trang luôn mở ở tab Mạng xã hội, bỏ qua hash còn sót trên URL
+                moveLine('social');
+                requestAnimationFrame(() => { if (line) line.style.transition = ''; });
+            });
+            window.addEventListener('resize', () => moveLine(currentActiveTab));
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => moveLine(currentActiveTab));
+            }
         });
     </script>
 </body>

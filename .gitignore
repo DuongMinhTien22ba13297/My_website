@@ -21,3 +21,7 @@ assets/models_data.js
 assets/three.min.js
 assets/GLTFLoader.js
 assets/*.webm
+
+# Thư mục công cụ & báo cáo thiết kế cục bộ (không đưa lên repo)
+.tools/
+.impeccable/
